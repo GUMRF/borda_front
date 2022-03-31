@@ -1,3 +1,6 @@
+import StyledButton from '../Styles/NavBarButtons'
+
+
 export default function NavBar() {
     return(
 <div class="header-2">
@@ -12,9 +15,9 @@ export default function NavBar() {
     </div>
 
     <div class="hidden md:flex flex-col md:flex-row md:mr-auto mt-3 md:mt-0" id="navbar-collapse">
-      <a href="#" class="p-2 lg:px-4 md:mx-2 text-slate-200 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">Home</a>
+      <StyledButton>Home</StyledButton>
       <a href="#" class="p-2 lg:px-4 md:mx-2 text-slate-200 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">Scoreboard</a>
-      <a href="#" class="p-2 lg:px-4 md:mx-2 text-slate-200 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">Challanges</a>
+      <a href="/Challenges" class="p-2 lg:px-4 md:mx-2 text-slate-200 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">Challenges</a>
       <a href="#" class="p-2 lg:px-4 md:mx-2 text-slate-200 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300">FAQ</a>
      </div>
 
