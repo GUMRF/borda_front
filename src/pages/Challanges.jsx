@@ -1,6 +1,6 @@
 import Task from '../components/Task';
 
-export const ChallengesPage = () => {
+export const ChallangesPage = () => {
 	return (
 		<>
 			<h1>Challenges Page</h1>
