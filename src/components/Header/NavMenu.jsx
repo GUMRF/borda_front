@@ -6,15 +6,15 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const NavItem = () => {
+const NavItem = (props) => {
   return (
     <Menu.Item>
       {({ active }) => (
-        <a href="/#" className={classNames(
+        <a href={props.label} className={classNames(
           active ? 'bg-blue-500' : 'bg-zinc-900',
           'px-4 py-3 text-base flex justify-center items-center border-b-2 border-gray-600'
         )}
-        ><span>Scoreboard</span>
+        ><span>{props.label}</span>
         </a>
       )}
     </Menu.Item>
@@ -50,7 +50,7 @@ export default function NavMenu() {
           </span>
         </div>
         <div className='w-full'>
-          <span>Challenges</span>
+          <span>Navigation</span>
         </div>
         <ChevronDownIcon className="w-6 h-6 mr-3 ml-1" aria-hidden="true" />
       </Menu.Button>
@@ -66,9 +66,9 @@ export default function NavMenu() {
       >
         <Menu.Items className="origin-top-left absolute left-0 w-60 shadow-lg pt-1">
           <div className='flex flex-col'>
-            <NavItem />
-            <NavItem />
-            <NavItem />
+            <NavItem label = "Challanges"/>
+            <NavItem label = "Scoreboard"/>
+            <NavItem label = "FAQ"/>
           </div>
         </Menu.Items>
       </Transition>

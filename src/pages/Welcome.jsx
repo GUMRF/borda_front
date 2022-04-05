@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Typist from 'react-typist'
 
-function WelcomePage() {
+export const WelcomePage = () => {
     document.title = `ADMCTF 2022`;
 
     const [count, setCount] = useState(1);
@@ -72,5 +72,3 @@ function WelcomePage() {
         </div>
     );
 }
-
-export default WelcomePage;

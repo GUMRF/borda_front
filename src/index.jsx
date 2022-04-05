@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div className="App">
+    <div className="App h-screen">
     <App/>
     </div>
   </React.StrictMode>,
