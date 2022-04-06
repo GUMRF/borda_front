@@ -4,7 +4,7 @@ export default function SearchBar() {
     <input
       type="search"
       class="
-      mx-3 w-72  text-base form-control first-letter rounded
+      w-full  text-base form-control first-letter rounded
       hover: bg-zinc-400
       "
       id="Search"
