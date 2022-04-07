@@ -2,6 +2,8 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
+const pathname = window.location.pathname
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -50,7 +52,7 @@ export default function NavMenu() {
           </span>
         </div>
         <div className='w-full'>
-          <span>Navigation</span>
+          <span>{pathname.slice(1)}</span>
         </div>
         <ChevronDownIcon className="w-6 h-6 mr-3 ml-1" aria-hidden="true" />
       </Menu.Button>

@@ -10,7 +10,7 @@ module.exports = {
     // },
     extend: {
       animation: {
-        'spin-slow': 'spin 10s linear infinite',
+        'spin-slow': 'spin 30s linear infinite',
       }
     },
   },

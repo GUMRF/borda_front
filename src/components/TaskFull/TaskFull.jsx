@@ -1,14 +1,28 @@
 import Taskinput from './Taskinput';
 import SubmitButton from './Button';
-
+import { useGettasksQuery } from "../../redux/tasksApi"
 
 export default function TaskFull(props) {
+
+	const data = useGettasksQuery();
+
+	const params = {
+		id: JSON.stringify(data.tasks['0']['id']),
+		title: JSON.stringify(data.tasks['0']['title']),
+		desciption: JSON.stringify(data.tasks['0']['desciption']),
+		category: JSON.stringify(data.tasks['0']['category']),
+		complexity: JSON.stringify(data.tasks['0']['complexity']),
+		points: JSON.stringify(data.tasks['0']['points']),
+		hint: JSON.stringify(data.tasks['0']['hint']),
+		isSolved: JSON.stringify(data.tasks['0']['isSolved']),
+	}
+
     return (
-        <div className="h-96 grid content-between border-2 border-zinc-300">
+        <div className="h-96 grid content-between border-2 border-zinc-300 my-8 col-span-4">
             <div className="bg-gray-100 h-32  border-b-2 border-zinc-300">
                 <div className="flex flex-row justify-between">
-                    <div className="text-sky-500 text-3xl pl-4 pt-2 font-semibold">Название таска</div>
-                    <div className="text-black font-semibold text-3xl pt-2 px-3">1000</div>
+                    <div className="text-sky-500 text-3xl pl-4 pt-2 font-semibold">{params.title}</div>
+                    <div className="text-black font-semibold text-3xl pt-2 px-3">{params.points}</div>
                 </div>
 
                 <div className="flex flex-row justify-between">
