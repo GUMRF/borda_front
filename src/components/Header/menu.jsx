@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { Link } from "react-router-dom";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
@@ -8,30 +9,42 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const NavItem = (props) => {
+const NavItem = (params) => {
   return (
     <Menu.Item>
+
       {({ active }) => (
-        <a href={props.label} className={classNames(
-          active ? 'bg-blue-500' : 'bg-zinc-900',
-          'px-4 py-3 text-base flex justify-center items-center border-b-2 border-gray-600'
-        )}
-        ><span>{props.label}</span>
-        </a>
+        <Link
+          to={params.label}
+          className={
+            classNames(active ? 'bg-blue-600' : '',
+              'px-2')
+          }
+        >
+          <div className="h-12 flex flex-row items-center">
+            <span className="px-2 align-middle">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </span>
+            <span className='capitalize'>{params.label}</span>
+          </div>
+        </Link>
       )}
     </Menu.Item>
   );
 }
 
+// Прокинуть active чтобы сделать цвет в панеле темнее при открытом меню как в hover эффекте
 export default function NavMenu() {
   return (
-    <Menu as="div" className="bg-zinc-800 text-gray-200">
-      <Menu.Button className="
-        flex justify-between items-center h-full w-60 
-        text-base 
-        border-r-2 border-zinc-900
-      hover:bg-zinc-900"
-      >
+    <Menu as="div" className=" text-gray-200">
+      <Menu.Button
+        className="
+          flex justify-between items-center h-full w-60
+          text-base
+          border-r-2 border-zinc-900
+          hover:bg-zinc-900">
         <div className='ml-4 mr-2'>
           <span>
             <svg width="36" height="36" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,11 +79,11 @@ export default function NavMenu() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="origin-top-left absolute left-0 w-60 shadow-lg pt-1">
-          <div className='flex flex-col'>
-            <NavItem label = "Challanges"/>
-            <NavItem label = "Scoreboard"/>
-            <NavItem label = "FAQ"/>
+        <Menu.Items className="absolute z-50 top-14 my-2 left-0 w-60 shadow-lg bg-zinc-800 ">
+          <div className='flex flex-col py-2'>
+            <NavItem label="challenges" />
+            <NavItem label="scoreboard" />
+            <NavItem label="faq" />
           </div>
         </Menu.Items>
       </Transition>
