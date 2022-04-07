@@ -2,8 +2,9 @@ import Task from '../components/Task';
 import TaskFull from '../components/TaskFull/TaskFull';
 
 export const ChallangesPage = () => {
-	return (
 
+	return (
+		
 		<div className="flex flex-row w-full">
 			<div className="w-60 w-min-60 h-screen border-r-2 border-zinc-300 p-4 fixed">
 				<li class="mt-12 lg:mt-8">
@@ -29,7 +30,8 @@ export const ChallangesPage = () => {
 						Ебать ты чукча!
 					</marquee>
 				</div>
-				<div className="p-7"><TaskFull/></div>
+				<div className="p-7"><TaskFull  /></div>
+				
 				<div className="grid grid-cols-4 gap-1 p-7">
 					<Task />
 					<Task />
