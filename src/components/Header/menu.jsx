@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { Link } from "react-router-dom";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
@@ -6,16 +7,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-const NavItem = (props) => {
+const NavItem = (params) => {
   return (
     <Menu.Item>
       {({ active }) => (
-        <a href={props.label} className={classNames(
-          active ? 'bg-blue-500' : 'bg-zinc-900',
-          'px-4 py-3 text-base flex justify-center items-center border-b-2 border-gray-600'
-        )}
-        ><span>{props.label}</span>
-        </a>
+        <Link
+          to={params.label}
+          className={
+            classNames(active ? 'bg-blue-500' : 'bg-zinc-900',
+              'px-4 py-3 text-base flex justify-center items-center border-b-2 border-gray-600')
+          }
+        >
+          <span className='normal-case'>{params.label}</span>
+        </Link>
       )}
     </Menu.Item>
   );
@@ -24,8 +28,8 @@ const NavItem = (props) => {
 export default function NavMenu() {
   return (
     <Menu as="div" className="bg-zinc-800 text-gray-200">
-      <Menu.Button className="
-        flex justify-between items-center h-full w-60 
+      <Menu.Button
+        className="flex justify-between items-center h-full w-60 
         text-base 
         border-r-2 border-zinc-900
       hover:bg-zinc-900"
@@ -66,9 +70,9 @@ export default function NavMenu() {
       >
         <Menu.Items className="origin-top-left absolute left-0 w-60 shadow-lg pt-1">
           <div className='flex flex-col'>
-            <NavItem label = "Challanges"/>
-            <NavItem label = "Scoreboard"/>
-            <NavItem label = "FAQ"/>
+            <NavItem label="challanges" />
+            <NavItem label="scoreboard" />
+            <NavItem label="faq" />
           </div>
         </Menu.Items>
       </Transition>

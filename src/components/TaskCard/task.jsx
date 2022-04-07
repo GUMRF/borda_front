@@ -1,8 +1,5 @@
-export default function Task(props) {
-	
-
+export function Task() {
 	return (
-		
 		<div className="bg-gray-100 h-24">
 			<div className="flex flex-row justify-between">
 				<div className="text-sky-500 text-3xl pl-4 pt-2 font-semibold">Название таска</div>

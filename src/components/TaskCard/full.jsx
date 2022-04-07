@@ -1,8 +1,4 @@
-import Taskinput from './Taskinput';
-import SubmitButton from './Button';
-
-
-export default function TaskFull(props) {
+export function TaskFull(props) {
     return (
         <div className="h-96 grid content-between border-2 border-zinc-300">
             <div className="bg-gray-100 h-32  border-b-2 border-zinc-300">
@@ -33,8 +29,15 @@ export default function TaskFull(props) {
                 <span>I seem to have forgottenn my flag ...I seem to have forgotten my flag ...I seem ton my flag ...I seem to have forgotten my flag ...I seem ton my flag ...I seem to have forgotten my flag ...I seem ton my flag ...I seem to have forgotten my flag ...I seem to my flag ...I seem to have forgotten my flag ...I seem to have forgotten my flag ...I seem to have forgotten my flag ...I seem to have forgotten my flag ...I seem to have forgotten my flag ...</span>
                 <div className="text-red-600 py-2 ">Прикрипленный файл</div>
                 <div className="py-3 flex flex-row justify-between">
-                    <Taskinput />
-                    <SubmitButton />
+                    <input
+                        type="search"
+                        className=" w-full h-9 text-base form-control first-letter rounded hover: bg-gray-100"
+                        id="Search"
+                        placeholder="flag={...}"
+                    />
+                    <button className="bg-zinc-300 hover:bg-gray-400 h-9 text-black ml-4 px-4 rounded font-medium border-1 border-black">
+                        Отправить
+                    </button>
                 </div>
             </div>
             <div className="bg-gray-100 h-10 flex justify-between items-center px-3 font font-semibold border-t-2 border-zinc-300">
