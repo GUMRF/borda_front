@@ -5,7 +5,7 @@ import CountdownTimer from './timer';
 export default function Header() {
   return (
     <>
-      <header className='w-full h-14 bg-zinc-800 flex flex-row'>
+      <header className='w-full h-14 bg-zinc-800 flex flex-row text-sm'>
         <NavMenu />
         <div className='flex flex-row justify-between items-center  w-full'>
           <div className='w-72 px-3'>

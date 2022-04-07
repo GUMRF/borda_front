@@ -4,7 +4,7 @@ import {
     useEffect
 } from 'react';
 import { Link } from "react-router-dom";
-import { Typist } from 'react-typist';
+import Typist from 'react-typist';
 
 export function Home() {
     const [count, setCount] = useState(1);
