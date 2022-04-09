@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import dayjs from 'dayjs'
 import { LightningBoltIcon } from '@heroicons/react/outline';
+import { ClockIcon } from '@heroicons/react/outline';
+
 
 const defaultRemainingTime = {
     seconds: '37',
