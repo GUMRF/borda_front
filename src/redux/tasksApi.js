@@ -1,15 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { token} from './loginApi';
+// import { token} from './loginApi';
 
 
 export const tasksApi = createApi({ 
     reducerPath:'tasksApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://167.172.32.127:8080/api/v1', 
+    baseQuery: fetchBaseQuery({baseUrl: 'api/v1', 
     
     prepareHeaders: (headers) => {
-        
-        if (token) {
-          headers.append('Authorization', `Bearer ${token}`)
+
+        if (localStorage.getItem('token').slice(10,-2)) {
+          headers.set('authorization', `Bearer ${localStorage.getItem('token').slice(10,-2)}`)
         }
         return headers
       }, mode:'cors'
@@ -21,6 +21,8 @@ export const tasksApi = createApi({
     }),
 
 });
+
+
 
 export const {useGettasksQuery} = tasksApi;
 

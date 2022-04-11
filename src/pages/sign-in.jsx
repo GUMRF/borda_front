@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { token, useGetloginsMutation } from "../redux";
+import { useGetloginsMutation } from "../redux";
 
 
 
-export function FAQ() {
+export function Sign() {
 	
-	const [newLogin, setNewLogin] = useState('');
+	const [newLogin , setNewLogin] = useState('');
+    const [newPass , setNewPass] = useState('');
 	const [inputLogin, { }] = useGetloginsMutation();
 	// if(data) {
 	// console.log(JSON.stringify(data.tasks))
@@ -13,15 +14,15 @@ export function FAQ() {
 	const handleLogin = async () => {
 		if (newLogin) {
 			await inputLogin({
-				"password": newLogin,
-				"username": "TestUser1"
+				"password": newPass,
+				"username": newLogin
 			}).unwrap();
-			setNewLogin('');
+			// setNewLogin('');
 			
 		}
 	}
+    console.log(newLogin.password)
 
-	// console.log(useGetloginsMutation())
 
 	return (
 		<>
@@ -30,6 +31,12 @@ export function FAQ() {
 					type="text"
 					value={newLogin}
 					onChange={(e) => setNewLogin(e.target.value)} />
+			</div>
+            <div>
+				<input
+					type="text"
+					value={newPass}
+					onChange={(e) => setNewPass(e.target.value)} />
 			</div>
 			<button type="button" class="px-5 py-2.5 text-black bg-white focus:ring-4 focus:outline-none focus:ring-grey font-medium rounded-lg text-sm text-center"
 				onClick={handleLogin}>

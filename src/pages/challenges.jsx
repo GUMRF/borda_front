@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import TaskCard from "../components/TaskCard";
 
+
 export function Challenges() {
   const tasks = ["", "", "", ""];
   return (
@@ -107,6 +108,7 @@ export function Challenges() {
               category="crypto"
               author={{ name: "Nlxes", contact: "@N1x3s" }}
             />
+            
           </div>
         </div>
       </div>

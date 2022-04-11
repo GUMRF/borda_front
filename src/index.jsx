@@ -10,6 +10,7 @@ import { Home } from './pages/home';
 import { Challenges } from './pages/challenges';
 import { Scoreboard } from './pages/scoreboard';
 import { FAQ } from './pages/faq';
+import {Sign} from './pages/sign-in'
 
 import Header from './components/Header';
 
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/challenges" element={< Challenges />} />
           <Route exact path="/scoreboard" element={< Scoreboard />} />
           <Route exact path="/faq" element={< FAQ />} />
+          <Route exact path="/sign" element={< Sign />} />
         </Routes>
 
     </>

@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 
-export let token;
+export let token ;
 
 export const loginsApi = createApi({
     reducerPath:'loginsApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://167.172.32.127:8080/api/v1/auth/', 
+    baseQuery: fetchBaseQuery({baseUrl: 'api/v1/auth/', 
     // mode:'cors'
      }),
     endpoints: (build) => ({  // endpoints - это действия с сервером получить или мутировать тд и тп 
@@ -18,8 +18,11 @@ export const loginsApi = createApi({
             // transformResponse: (response) => response.data
             transformResponse: (response) =>
             {
-                token=response;
-                return (console.log(token))
+                token=response
+                localStorage.setItem('token',JSON.stringify(response))
+                // console.log(JSON.stringify(token))
+                // console.log(JSON.parse(localStorage.getItem('token')))
+               
             }
             
 
