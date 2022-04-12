@@ -16,7 +16,7 @@ export default function TaskCard(props) {
 			border-2 rounded border-gray-400
 			bg-white
       overflow-clip
-			${isOpen ? "lg:col-span-3 md:col-span-2" : ""}
+			${isOpen ? "2xl:col-span-4 lg:col-span-3 md:col-span-2" : ""}
 			`}
       >
         <div
@@ -73,16 +73,7 @@ export default function TaskCard(props) {
         {isOpen ? (
           <>
             <div className="px-4">
-              <p>
-                {props.description}I seem to have forgottenn my flag ...I seem
-                to have forgotten my flag ...I seem ton my flag ...I seem to
-                have forgotten my flag ...I seem ton my flag ...I seem to have
-                forgotten my flag ...I seem ton my flag ...I seem to have
-                forgotten my flag ...I seem to my flag ...I seem to have
-                forgotten my flag ...I seem to have forgotten my flag ...I seem
-                to have forgotten my flag ...I seem to have forgotten my flag
-                ...I seem to have forgotten my flag ...
-              </p>
+              <p>{props.description}</p>
               <div className="text-red-600 py-2 ">Прикрипленный файл</div>
               <div className="py-3 flex flex-row justify-between">
                 <input
@@ -92,7 +83,12 @@ export default function TaskCard(props) {
 			              w-full h-9 text-base rounded hover: bg-gray-100"
                   placeholder="CTF{...}"
                 />
-                <button className="bg-zinc-300 hover:bg-gray-400 h-9 text-black ml-4 px-4 rounded font-medium border-1 border-black">
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                  }}
+                  className="bg-zinc-300 hover:bg-gray-400 h-9 text-black ml-4 px-4 rounded font-medium border-1 border-black"
+                >
                   Отправить
                 </button>
               </div>

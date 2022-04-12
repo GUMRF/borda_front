@@ -1,1 +1,0 @@
-export default abobа = 'http://167.172.32.127:8080/api/v1'
