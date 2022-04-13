@@ -1,9 +1,12 @@
 import { React, useState, useEffect } from "react";
 import TaskCard from "../components/TaskCard";
-
+import { useGetTasksQuery } from "../api/tasks";
 
 export function Challenges() {
-  const tasks = ["", "", "", ""];
+  const { data, isLoading } = useGetTasksQuery();
+  if (isLoading) {
+    return <div>12</div>;
+  }
   return (
     <>
       <div className="flex flex-row w-full text-sm">
@@ -73,42 +76,16 @@ export function Challenges() {
               lg:grid-cols-3
 			      "
           >
-            {/* {tasks.map((_, id) => {
+            {data.tasks.map((task) => (
               <TaskCard
-                id={id}
-                title="Название таска"
-                points="1000"
+                id={task.id}
+                title={task.title}
+                points={task.points}
                 tags={["baby", "reverse", "linux"]}
                 category="crypto"
                 author={{ name: "Nlxes", contact: "@N1x3s" }}
               />
-            })} */}
-
-            <TaskCard
-              id={0}
-              title="Название таска"
-              points="1000"
-              tags={["baby", "reverse", "linux"]}
-              category="crypto"
-              author={{ name: "Nlxes", contact: "@N1x3s" }}
-            />
-            <TaskCard
-              id={0}
-              title="Название таска"
-              points="1000"
-              tags={["baby", "reverse", "linux"]}
-              category="crypto"
-              author={{ name: "Nlxes", contact: "@N1x3s" }}
-            />
-            <TaskCard
-              id={0}
-              title="Название таска"
-              points="1000"
-              tags={["baby", "reverse", "linux"]}
-              category="crypto"
-              author={{ name: "Nlxes", contact: "@N1x3s" }}
-            />
-            
+            ))}
           </div>
         </div>
       </div>
