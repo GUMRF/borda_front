@@ -34,17 +34,16 @@ function App() {
   let location = useLocation();
   return (
     <>
-      {location.pathname !== "/sign-in" ? (<Header />) : null}
+      {location.pathname !== "/sign-in" && location.pathname !=="/registration" && location.pathname !=="/" ? (<Header/>) : null}
       <Routes>
         <Route exact path="/" element={< Home />} />
         <Route exact path="/challenges" element={< Challenges />} />
         <Route exact path="/scoreboard" element={< Scoreboard />} />
         <Route exact path="/faq" element={< FAQ />} />
         <Route exact path="/sign-in" element={< SignIn />} />
-        <Route exact path="/register" element={< Registration />} />
+        <Route exact path="/registration" element={< Registration />} />
         <Route exact path="/sign-out" element={<SignOut />} />
       </Routes>
-
     </>
   );
 }

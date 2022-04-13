@@ -5,7 +5,7 @@ import { useGetTasksQuery } from "../api/tasks";
 export function Challenges() {
   const { data, isLoading } = useGetTasksQuery();
   if (isLoading) {
-    return <div>12</div>;
+    return <div className="text-2xl">Loading...</div>;
   }
   return (
     <>
