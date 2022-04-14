@@ -8,7 +8,7 @@ export const tasksApi = createApi({
     baseUrl: `http://${backendURL}/api/v1/`,
 
     prepareHeaders: (headers) => {
-      if (localStorage.getItem("token").slice(10, -2)) {
+      if (localStorage.getItem("token")) {
         headers.set("authorization", `Bearer ${localStorage.getItem("token")}`);
       }
       return headers;
@@ -19,7 +19,19 @@ export const tasksApi = createApi({
     getTasks: build.query({
       query: () => "tasks",
     }),
+    getSubm: build.mutation({ //Подтверждение флага
+      query: (body,id) => ({
+        url: `tasks/${id}/flag`,
+        method: "POST",
+        body,
+      }),
+
+      // transformResponse: (response) => {
+      //   localStorage.setItem("isCorrect", response.isCorrect); // хз что в ответ вернется
+      //   console.log(response.isCorrect)
+      // },
+    }),
   }),
 });
 
-export const { useGetTasksQuery } = tasksApi;
+export const { useGetTasksQuery,useGetSubmMutation } = tasksApi;

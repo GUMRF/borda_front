@@ -11,8 +11,10 @@ import { Challenges } from './pages/challenges';
 import { Scoreboard } from './pages/scoreboard';
 import { FAQ } from './pages/faq';
 import { SignIn } from './pages/sign-in'
-import { Registration } from './pages/registration'
+import { SignUp } from './pages/sign-up'
 import { SignOut } from './pages/sign-out'
+import { UserProfile } from './pages/user-profile'
+import { NotFound } from './pages/notFound';
 
 import Header from './components/Header';
 
@@ -34,15 +36,18 @@ function App() {
   let location = useLocation();
   return (
     <>
-      {location.pathname !== "/sign-in" && location.pathname !=="/registration" && location.pathname !=="/" ? (<Header/>) : null}
+      {/* {location.pathname !== "/sign-in" && location.pathname !=="/sign-up" && location.pathname !=="/" ? (<Header/>) : null} */}
+      {location.pathname === "/challenges" || location.pathname === "/scoreboard" || location.pathname === "/FAQ" || location.pathname === "/settings" ? (<Header />) : null}
       <Routes>
         <Route exact path="/" element={< Home />} />
         <Route exact path="/challenges" element={< Challenges />} />
         <Route exact path="/scoreboard" element={< Scoreboard />} />
-        <Route exact path="/faq" element={< FAQ />} />
+        <Route exact path="/FAQ" element={< FAQ />} />
         <Route exact path="/sign-in" element={< SignIn />} />
-        <Route exact path="/registration" element={< Registration />} />
-        <Route exact path="/sign-out" element={<SignOut />} />
+        <Route exact path="/sign-up" element={< SignUp />} />
+        <Route exact path="/sign-out" element={< SignOut />} />
+        <Route exact path="/settings" element={< UserProfile />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

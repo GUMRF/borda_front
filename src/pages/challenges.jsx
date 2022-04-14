@@ -1,12 +1,18 @@
-import { React, useState, useEffect } from "react";
+import { React, useEffect } from "react";
 import TaskCard from "../components/TaskCard";
-import { useGetTasksQuery } from "../api/tasks";
+import { Link, Navigate } from "react-router-dom";
+
+import {useGetTasksQuery } from "../api/tasks";
 
 export function Challenges() {
-  const { data, isLoading } = useGetTasksQuery();
+  const { data,error, isLoading } = useGetTasksQuery();
+
   if (isLoading) {
     return <div className="text-2xl">Loading...</div>;
   }
+
+
+  // console.log(error.status)
   return (
     <>
       <div className="flex flex-row w-full text-sm">
@@ -76,7 +82,7 @@ export function Challenges() {
               lg:grid-cols-3
 			      "
           >
-            {data.tasks.map((task) => (
+            {data.map((task) => (
               <TaskCard
                 id={task.id}
                 title={task.title}
@@ -89,6 +95,7 @@ export function Challenges() {
           </div>
         </div>
       </div>
+      {localStorage.getItem("token") === null ? <Navigate to="/sign-up" /> : null}
     </>
   );
 }

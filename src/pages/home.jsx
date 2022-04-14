@@ -54,7 +54,7 @@ export function Home() {
                     }
                 </h1>
                 <div className='my-16'>
-                    <Link to = { localStorage.getItem("token") === null  ? '/sign-in' : '/challenges'}
+                    <Link to = { localStorage.getItem("token") === null  ? '/sign-up' : '/challenges'}
                         className='px-5 py-2.5 text-black bg-white focus:ring-4 focus:outline-none focus:ring-grey font-medium rounded-lg text-sm text-center'
                     ><span>Play</span>
                     </Link>

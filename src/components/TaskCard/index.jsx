@@ -2,12 +2,28 @@ import { React, useState, useEffect } from "react";
 import { CheckIcon } from "@heroicons/react/outline";
 import { FlagIcon } from "@heroicons/react/outline";
 
+import { useGetSubmMutation } from "../../api/tasks";
+
 export default function TaskCard(props) {
   const [isOpen, setIsOpen] = useState(0);
+  const [answer, setNewAnswer] = useState('')
+  const [inputFlag, { }] = useGetSubmMutation(answer,props.id);
+
+  console.log(props.id)
 
   useEffect(() => {
     console.log(isOpen);
   }, [isOpen]);
+
+  const handleFlag = async () => {
+    if (answer) {
+      await inputFlag({
+        flag: answer,
+      }).unwrap();
+      setNewAnswer("");
+    }
+  };
+
 
   return (
     <>
@@ -82,12 +98,11 @@ export default function TaskCard(props) {
                     px-2 appearance-none 
 			              w-full h-9 text-base rounded hover: bg-gray-100"
                   placeholder="CTF{...}"
+                  onChange={(e) => setNewAnswer(e.target.value)}
                 />
                 <button
-                  onClick={() => {
-                    localStorage.clear();
-                  }}
                   className="bg-zinc-300 hover:bg-gray-400 h-9 text-black ml-4 px-4 rounded font-medium border-1 border-black"
+                  onClick={handleFlag}
                 >
                   Отправить
                 </button>

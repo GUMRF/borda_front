@@ -1,12 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+import { backendURL } from "../config";
+
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://167.172.32.127:8080/api/v1/auth",
+    baseUrl: `http://${backendURL}/api/v1/auth`,
   }),
   endpoints: (build) => ({
-    // endpoints - это действия с сервером получить или мутировать тд и тп
     getAuth: build.mutation({
       query: (body) => ({
         url: "sign-in",
@@ -15,11 +16,19 @@ export const authApi = createApi({
       }),
 
       transformResponse: (response) => {
-        console.log(response.token);
         localStorage.setItem("token", response.token);
       },
     }),
+    getRegistr: build.mutation({
+      query: (body) => ({
+        url: "sign-up",
+        method: "POST",
+        body,
+      }),
+    }),
+
   }),
+
 });
 
-export const { useGetAuthMutation } = authApi;
+export const { useGetAuthMutation,useGetRegistrMutation } = authApi;
