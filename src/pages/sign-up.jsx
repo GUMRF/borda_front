@@ -42,7 +42,7 @@ export function SignUp() {
               <path fill-rule="evenodd" clip-rule="evenodd" d="M46.2147 34.7296L46.5904 35.4527L47.3794 35.5842L46.8158 36.1571L46.938 36.9553L46.2147 36.5984L45.4914 36.9553L45.6135 36.1571L45.0405 35.5842L45.8389 35.4527L46.2147 34.7296Z" fill="#5FC6F1" />
               <path fill-rule="evenodd" clip-rule="evenodd" d="M24.1586 12.4062C24.1586 12.4062 24.0741 12.0211 23.7359 11.4858C23.3884 10.9599 23.4729 10.0865 24.1399 9.73902C24.7974 9.38215 25.3328 9.17553 25.5488 8.78109C25.6522 8.57448 25.7179 8.42422 25.7649 8.30213C25.8024 8.19883 25.7555 8.07674 25.8306 8.06735C25.8964 8.04856 25.9246 8.20822 25.934 8.26457C26.0936 8.83744 25.9621 9.01588 25.7931 9.29762C26.5727 8.87501 26.7606 8.42422 26.986 7.46629C27.0142 7.3536 26.9954 7.10003 27.0799 7.10003C27.1926 7.09064 27.2208 7.30664 27.249 7.43812C27.5308 8.50874 27.512 9.44789 26.3754 10.218C25.8776 10.5467 26.1594 12.2184 25.3046 12.378L24.8631 12.4531C24.4968 11.345 24.8631 10.3682 25.3704 10.0959C25.3704 10.0959 24.7504 10.3682 24.5625 10.9317C24.3747 11.5046 24.7034 12.3874 24.7034 12.3874L24.1586 12.4062Z" fill="#274795" />
             </svg>
-            <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900">Join the Makarov ADM CTF</h2>
+            <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900">Join ADM CTF</h2>
           </div>
           <form className="mt-8 space-y-6">
             <input type="hidden" />
@@ -57,8 +57,12 @@ export function SignUp() {
                   value={newLogin}
                   onChange={(e) => setNewLogin(e.target.value)}
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  placeholder="Username"
+                  className="appearance-none rounded-none 
+                    relative block w-full px-3 py-2 
+                    border border-gray-300 rounded-t-md
+                    placeholder-gray-500 text-gray-900
+                    focus:outline-none focus:ring-sky-700 focus:border-sky-700 focus:z-10 
+                    sm:text-sm"placeholder="Username"
                 />
               </div>
               <div>
@@ -71,7 +75,12 @@ export function SignUp() {
                   value={newPass}
                   onChange={(e) => setNewPass(e.target.value)}
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none
+                    relative block w-full px-3 py-2
+                    border border-gray-300
+                    placeholder-gray-500 text-gray-900
+                    focus:outline-none focus:ring-sky-700 focus:border-sky-700 focus:z-10
+                    sm:text-sm"
                   placeholder="Password"
                 />
               </div>
@@ -82,7 +91,12 @@ export function SignUp() {
                   value={newContact}
                   onChange={(e) => setNewContact(e.target.value)}
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none 
+                    relative block w-full px-3 py-2 
+                    border border-gray-300 rounded-b-md
+                    placeholder-gray-500 text-gray-900
+                    focus:outline-none focus:ring-sky-700 focus:border-sky-700 focus:z-10 
+                    sm:text-sm"
                   placeholder="Telegram"
                 />
               </div>
@@ -92,8 +106,15 @@ export function SignUp() {
               <button
                 type="button"
                 onClick={handleLogin}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-
+                className="
+                  group relative  
+                  flex justify-center 
+                  w-full py-2 px-4 
+                  border border-transparent
+                  text-sm font-medium rounded-md text-white 
+                  bg-sky-600 
+                  hover:bg-sky-700 
+                  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-600"
               >
                 {/* { localStorage.getItem("token") === null  ? : "Null"} */}
                 Sign up
@@ -102,7 +123,7 @@ export function SignUp() {
           </form>
           <div className="border-zinc-200 border-2 rounded h-16 flex items-center place-content-center">
             Have account?
-            <Link to="/sign-in" className="pl-3 text-indigo-700">Log in</Link>
+            <Link to="/sign-in" className="pl-3 text-sky-600">Log in</Link>
             <div>.</div>
           </div>
         </div>

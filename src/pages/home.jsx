@@ -14,7 +14,7 @@ export function Home() {
     }, [count]);
     
     return (
-        <div className='flex justify-center items-center h-screen bg-black p-64' >
+        <div className='flex justify-center items-center h-screen bg-black p-64 overflow-hidden relative' >
             <div className='absolute top-12 left-28 z-0 scale-100z' width="500" height="500">
                 <div className='relative'>
                     <span className='absolute animate-spin-slow'>
@@ -41,7 +41,9 @@ export function Home() {
                 </div>
             </div>
             <div className='flex flex-col items-center'>
-                <h1 className='z-50 text-white text-9xl font-bold uppercase'>
+                <h1 className='z-50
+                     text-white text-9xl font-bold uppercase
+                     h-96'>
                     {count ? (
                         <Typist avgTypingDelay={100} cursor={{ blink: true, }} onTypingDone={() => setCount(0)}>
                             <span>adm</span><br /><Typist.Delay ms={100} />
