@@ -19,19 +19,22 @@ export const tasksApi = createApi({
     getTasks: build.query({
       query: () => "tasks",
     }),
-    getSubm: build.mutation({ //Подтверждение флага
-      query: (body,id) => ({
+    sendFlag: build.mutation({ //Подтверждение флага
+      query (data) {
+        const {id, ...body} = data
+        return{
         url: `tasks/${id}/flag`,
         method: "POST",
         body,
-      }),
+      }
+      },
 
       // transformResponse: (response) => {
-      //   localStorage.setItem("isCorrect", response.isCorrect); // хз что в ответ вернется
+      //   localStorage.setItem("isCorrect", response.isCorrect);
       //   console.log(response.isCorrect)
       // },
     }),
   }),
 });
 
-export const { useGetTasksQuery,useGetSubmMutation } = tasksApi;
+export const { useGetTasksQuery,useSendFlagMutation } = tasksApi;

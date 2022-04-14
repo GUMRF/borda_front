@@ -2,27 +2,32 @@ import { React, useState, useEffect } from "react";
 import { CheckIcon } from "@heroicons/react/outline";
 import { FlagIcon } from "@heroicons/react/outline";
 
-import { useGetSubmMutation } from "../../api/tasks";
+import { useSendFlagMutation } from "../../api/tasks";
+import {store} from "../../redux/store"
 
 export default function TaskCard(props) {
   const [isOpen, setIsOpen] = useState(0);
-  const [answer, setNewAnswer] = useState('')
-  const [inputFlag, { }] = useGetSubmMutation(answer,props.id);
-
-  console.log(props.id)
+  const [newAnswer, setNewAnswer] = useState('')
+  const [inputFlag, {isSuccess}] = useSendFlagMutation();
 
   useEffect(() => {
     console.log(isOpen);
   }, [isOpen]);
 
+  // if (isSuccess ){    if (window.location.href.indexOf('reload')===-1) {
+  //   window.location.replace(window.location.href+'?reload');
+  //   }}
+
   const handleFlag = async () => {
-    if (answer) {
+    if (newAnswer) {
       await inputFlag({
-        flag: answer,
+        id: props.id,
+        flag: newAnswer,
       }).unwrap();
       setNewAnswer("");
     }
   };
+
 
 
   return (
@@ -94,15 +99,18 @@ export default function TaskCard(props) {
               <div className="py-3 flex flex-row justify-between">
                 <input
                   type="text"
+                  value={newAnswer}
+                  onChange={(e) => setNewAnswer(e.target.value)}
                   className="
                     px-2 appearance-none 
 			              w-full h-9 text-base rounded hover: bg-gray-100"
                   placeholder="CTF{...}"
-                  onChange={(e) => setNewAnswer(e.target.value)}
+
                 />
                 <button
-                  className="bg-zinc-300 hover:bg-gray-400 h-9 text-black ml-4 px-4 rounded font-medium border-1 border-black"
+                  type="button"
                   onClick={handleFlag}
+                  className="bg-zinc-300 hover:bg-gray-400 h-9 text-black ml-4 px-4 rounded font-medium border-1 border-black"
                 >
                   Отправить
                 </button>
