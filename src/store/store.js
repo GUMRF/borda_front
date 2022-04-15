@@ -1,8 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { authApi } from './auth/auth.api';
-import { taskApi } from './task/task.api';
-import { userApi } from './user/user.api';
-
+import { authApi } from '../api/auth';
+import { taskApi } from '../api/tasks';
+import { userApi } from '../api/users';
 
 export const store = configureStore({
     reducer: {

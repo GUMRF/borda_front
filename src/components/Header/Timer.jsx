@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import dayjs from 'dayjs'
 import { LightningBoltIcon } from '@heroicons/react/outline';
 import { ClockIcon } from '@heroicons/react/outline';
@@ -11,7 +11,7 @@ const defaultRemainingTime = {
     days: '01'
 }
 
-const CountdownTimer = ({countdownTimestampMs}) => {
+const CountdownTimer = ({ countdownTimestampMs }) => {
     const [remainingTime, setRemainingTime] = useState(defaultRemainingTime);
 
     useEffect(() => {
@@ -19,17 +19,17 @@ const CountdownTimer = ({countdownTimestampMs}) => {
             updateRemainingTime(countdownTimestampMs);
         }, 1000);
         return () => clearInterval(intervalId);
-    },[countdownTimestampMs]);
+    }, [countdownTimestampMs]);
 
     function updateRemainingTime(countdown) {
         setRemainingTime(getRemainingTimeUntilMsTimestamp(countdown));
     }
 
-    return(
+    return (
         <div className="
             flex items-center justify-center
             h-14 px-4">
-            <LightningBoltIcon className='h-6 w-6 mx-2' strokeWidth={1}/>
+            <LightningBoltIcon className='h-6 w-6 mx-2' strokeWidth={1} />
             <p>{remainingTime.hours}h {remainingTime.minutes}m {remainingTime.seconds}s (Time left)</p>
         </div>
     );

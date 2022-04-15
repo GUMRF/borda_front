@@ -1,10 +1,13 @@
-import { Link, Navigate } from "react-router-dom";
+import {
+    Link,
+    Navigate,
+} from "react-router-dom";
 
-
-export const Nick = "Nlxes"; //Потом будет экспортироваться с сервера
+export const Nick = "Nlxes";
 export const isCurrentlyInTeam = true;
 export const isCapitan = false;
-export function UserProfile() {
+
+export function Profile() {
     return (
         <>
             <div class="bg-gray-200 min-h-screen font-mono">
@@ -30,10 +33,10 @@ export function UserProfile() {
                                         <>
                                             {isCapitan ? (
                                                 <>
-                                                <div className="flex flex-row mb-1">
-                                                    <input class='w-full appearance-none block bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-2 px-2 leading-tight focus:outline-none  focus:border-gray-500' type='text' value="Teamname" required />
-                                                    <button class="ml-1 appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">Edit</button>
-                                                </div>
+                                                    <div className="flex flex-row mb-1">
+                                                        <input class='w-full appearance-none block bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-2 px-2 leading-tight focus:outline-none  focus:border-gray-500' type='text' value="Teamname" required />
+                                                        <button class="ml-1 appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">Edit</button>
+                                                    </div>
                                                 </>
                                             ) : <input class='w-full appearance-none block bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-2 px-2 leading-tight focus:outline-none  focus:border-gray-500' type='text' value="Teamname" required />
                                             }
@@ -59,7 +62,7 @@ export function UserProfile() {
                     </div>
                 </div>
             </div>
-            {localStorage.getItem("token") === null  ? <Navigate to="/sign-up" /> : null}
-        </>  
+            {/* {localStorage.getItem("token") === null ? <Navigate to="/sign-up" /> : null} */}
+        </>
     );
 }
