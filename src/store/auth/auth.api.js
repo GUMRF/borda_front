@@ -4,7 +4,7 @@ import API_BASE_URL from "../api";
 export const authApi = createApi({
     reducerPath: "api/auth",
     baseQuery: fetchBaseQuery({
-        baseUrl: API_BASE_URL,
+        baseUrl: `${API_BASE_URL}auth`,
     }),
     endpoints: (build) => ({
         getAuth: build.mutation({

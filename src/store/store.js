@@ -3,7 +3,6 @@ import { authApi } from './auth/auth.api';
 import { taskApi } from './task/task.api';
 import { userApi } from './user/user.api';
 
-import { taskApi } from './task/task.api';
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +13,6 @@ export const store = configureStore({
     middleware: (getDefaultMiddlware) => getDefaultMiddlware().concat(
         taskApi.middleware,
         authApi.middleware,
-        authApi.middleware,
+        userApi.middleware,
     )
 });

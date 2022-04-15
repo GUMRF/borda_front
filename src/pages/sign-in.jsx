@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { Link, Navigate } from "react-router-dom";
 
-import { useGetAuthMutation } from "../api/auth";
+import { useGetAuthMutation } from "../store/auth/auth.api";
 
 
 export function SignIn() {
@@ -16,7 +16,7 @@ export function SignIn() {
         password: newPass,
         username: newLogin,
       }).unwrap();
-      setNewLogin("");
+      setNewPass("");
     }
   };
 
