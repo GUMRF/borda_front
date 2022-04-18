@@ -6,7 +6,6 @@ export function NavMenu() {
 	const items = ['challenges', 'scoreboard', 'about'];
 	const location = useLocation();
 	const text = location.pathname.split('/').pop();
-	console.log(text);
 	return (
 		<DropDownMenu
 			items={items}

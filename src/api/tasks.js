@@ -5,7 +5,7 @@ import { prepareHeaders } from "./base";
 export const taskApi = createApi({
   reducerPath: "api/tasks",
   baseQuery: fetchBaseQuery({
-    baseUrl: API_BASE_URL,
+    baseUrl: `${API_BASE_URL}`,
 
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token')

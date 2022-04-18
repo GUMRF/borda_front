@@ -4,15 +4,16 @@ import { useGetUserProfileQuery } from "../../api/users";
 
 export function Account() {
 	const items = ["logout", "profile"];
-
-	useGetUserProfileQuery();
-
+	const { data, error, isLoading, isError } = useGetUserProfileQuery();
+	if (isLoading) {
+		return <div className="text-2xl">Loading...</div>;
+	}
 	return (
 		<DropDownMenu
 			items={items}
 			content={
 				<div className="flex flex-col">
-					<span className="">kekw</span>
+					<span className="">1</span>
 					<span className="text-xs">Team</span>
 				</div>
 			}

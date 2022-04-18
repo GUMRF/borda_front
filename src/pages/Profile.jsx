@@ -1,13 +1,14 @@
-import {
-    Link,
-    Navigate,
-} from "react-router-dom";
-
+import { Link, Navigate } from "react-router-dom";
+import { useGetUserProfileQuery } from "../api/users";
 export const Nick = "Nlxes";
 export const isCurrentlyInTeam = true;
 export const isCapitan = false;
 
 export function Profile() {
+    const { data, error, isLoading, isError } = useGetUserProfileQuery();
+    if (isLoading) {
+        return <div className="text-2xl">Loading...</div>
+    }
     return (
         <>
             <div class="bg-gray-200 min-h-screen font-mono">

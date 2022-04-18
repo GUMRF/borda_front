@@ -1,8 +1,10 @@
 import { NavMenu } from './NavMenu';
 import CountdownTimer from './Timer';
 import { Account } from './Account';
+import { IsAuth } from "../IsAuth";
 
 export default function Header() {
+	console.log(IsAuth());
 	return (
 		<>
 			<header
@@ -16,7 +18,7 @@ export default function Header() {
 				<div className='flex flex-row flex-1 justify-between items-center h-full'>
 					{/* <SearchBar/> */}
 					<CountdownTimer countdownTimestampMs={20000000000000} />
-					<Account />
+					{/* {IsAuth() ? <Account/> : <>123</>} */}
 				</div>
 			</header>
 		</>
