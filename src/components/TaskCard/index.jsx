@@ -7,10 +7,10 @@ import { useSendFlagMutation } from "../../api/tasks";
 export default function TaskCard(props) {
   const [isOpen, setIsOpen] = useState(0);
   const [newAnswer, setNewAnswer] = useState("");
+  const [isCorrect, setCorrect] = useState("");
   const [inputFlag, { isSuccess, isLoading }] = useSendFlagMutation();
 
   useEffect(() => {
-    console.log(isOpen);
   }, [isOpen]);
 
   if (isLoading) {
@@ -25,10 +25,10 @@ export default function TaskCard(props) {
       }).unwrap();
       setNewAnswer("");
       props.refetch();
-      console.log(boba.isCorrect);
+      setCorrect(boba.isCorrect);
     }
   };
-
+  console.log(isCorrect);
   return (
     <>
       {props.isSolved ? (
