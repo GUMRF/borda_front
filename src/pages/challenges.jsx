@@ -10,12 +10,12 @@ export function Challenges() {
 	if (isLoading) {
 		return <div className="text-2xl">Loading...</div>;
 	}
-	if(isError){
-		if(error.data.code=="NOT_AUTHORIZED") return <Navigate to = "/login"/>
+	if (isError) {
+		if (error.data.code == "NOT_AUTHORIZED") console.log(error.data)
 	}
 	return (
 		<>
-			<div className="flex flex-row w-full text-sm">
+			<div className="flex flex-row w-full text-sm h-screen">
 				<div
 					className="
 					w-60 w-min-60 h-screen
@@ -74,6 +74,9 @@ export function Challenges() {
 							{/*https://www.npmjs.com/package/react-fast-marquee*/}
 						</marquee>
 					</div>
+					{isError ? <>
+						{error.data.code == "NOT_AUTHORIZED" ? <div className="w-full h-full text-center text-2xl pt-12">Что бы начать решать таски, для начала авторизуйся</div> : <div>Произошла ошибка</div>}
+					</> : 
 					<div className="
 						p-4
 						grid grid-cols-1 gap-4
@@ -93,10 +96,9 @@ export function Challenges() {
 								color="blue"
 							/>
 						))}
-					</div>
+					</div>}
 				</div>
 			</div>
-			{}
 		</>
 	);
 }

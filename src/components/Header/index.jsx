@@ -2,9 +2,9 @@ import { NavMenu } from './NavMenu';
 import CountdownTimer from './Timer';
 import { Account } from './Account';
 import { IsAuth } from "../IsAuth";
+import { Link } from "react-router-dom";
 
 export default function Header() {
-	console.log(IsAuth());
 	return (
 		<>
 			<header
@@ -18,7 +18,7 @@ export default function Header() {
 				<div className='flex flex-row flex-1 justify-between items-center h-full'>
 					{/* <SearchBar/> */}
 					<CountdownTimer countdownTimestampMs={20000000000000} />
-					{/* {IsAuth() ? <Account/> : <>123</>} */}
+					{IsAuth()===true ? <Account /> : <Link to ="/login" className="pr-4">Login</Link> }
 				</div>
 			</header>
 		</>

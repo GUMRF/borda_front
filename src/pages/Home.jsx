@@ -13,7 +13,6 @@ export function Home() {
     useEffect(() => {
         setCount(1);
     }, [count]);
-
     return (
         <div className='flex justify-center items-center h-screen bg-black p-64 overflow-hidden relative' >
             <div className='absolute top-12 left-28 z-0 scale-100z' width="500" height="500">
@@ -57,7 +56,7 @@ export function Home() {
                     }
                 </h1>
                 <div className="my-16">
-                    <Link to = {`${IsAuth ? "/challenges" : "/login"}`}
+                    <Link to = {`${IsAuth()===true ? "/challenges" : "/login"}`}
                         className="px-5 py-2.5 text-black bg-white focus:ring-4 focus:outline-none focus:ring-grey font-medium rounded-lg text-sm text-center"
                     >
                         <span>Play</span>

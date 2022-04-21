@@ -11,6 +11,7 @@ import { Register } from './pages/Register'
 import { Logout } from './pages/Logout'
 import { Profile } from './pages/Profile'
 import { NotFound } from './pages/NotFound';
+import { UpdateTasks } from './pages/UpdateTasks';
 
 import Layout from './components/Layout';
 
@@ -31,6 +32,7 @@ export default function App() {
                 <Route path="scoreboard" element={<Layout> < Scoreboard /> </Layout>} />
                 <Route path="challenges" element={<Layout> < Challenges /> </Layout>} />
                 <Route path="profile" element={<Layout> < Profile /> </Layout>} />
+                <Route path="kekw" element={<Layout> < UpdateTasks /> </Layout>} />
             </Routes>
         </Router >
     );

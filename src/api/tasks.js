@@ -29,7 +29,17 @@ export const taskApi = createApi({
         }
       },
     }),
+    updateTasks: build.mutation({
+      query(data) {
+        const { id, ...body } = data
+        return {
+          url: `admin/tasks/${id}`,
+          method: "PATCH",
+          body,
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetTasksQuery, useSendFlagMutation } = taskApi;
+export const { useGetTasksQuery, useSendFlagMutation,useUpdateTasksMutation } = taskApi;
