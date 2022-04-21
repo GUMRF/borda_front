@@ -1,18 +1,16 @@
+import { Nav } from "@material-tailwind/react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 import { useSignInMutation } from "../api/auth";
+import { IsAuth } from "../components/IsAuth";
 
 export function Login() {
-	const navigate = useNavigate();
-	const [signIn, { }] = useSignInMutation();
-
-	const location = useLocation();
+	const [signIn, { isSucces, isError, error, isLoading }] = useSignInMutation();
 
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-
 	const handleLogin = async () => {
 		try {
 			const result = await signIn({
@@ -21,18 +19,15 @@ export function Login() {
 			});
 
 			if (result.data) {
-				localStorage.setItem("token", result.data.token)
-				navigate('/challenges', {
-					replace: true,
-					state: location.state,
-				});
+				localStorage.setItem("token", result.data.token);
 			}
 		} catch (err) {
 			console.log(err);
 		}
 		// setPassword("");
 	};
-
+	console.log(IsAuth())
+	// return <Navigate to ="/challenges"/>
 	return (
 		<>
 			<div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -87,7 +82,11 @@ export function Login() {
 								/>
 							</div>
 						</div>
-
+						{isError ? <>{
+							error.status === 500 ? (<div className="text-red-600">Invalid Login or Password</div>)
+								: null
+						}</>
+							: null}
 						<div>
 							<button
 								type="button"
@@ -95,19 +94,17 @@ export function Login() {
 								className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 
 							>
-								{/* { localStorage.getItem("token") === null  ? : "Null"} */}
 								Sign in
 							</button>
 						</div>
 					</form>
 					<div className="border-zinc-200 border-2 rounded h-16 flex items-center place-content-center">
 						No account?
-						<Link to="/sign-up" className="pl-3 text-indigo-700">Create one</Link>
+						<Link to="/register" className="pl-3 text-indigo-700">Create one</Link>
 						<div>.</div>
 					</div>
 				</div>
 			</div>
-			{/* {localStorage.getItem("token") === null  ? null :<Navigate to="/challenges" />} */}
 		</>
 	);
 }

@@ -11,7 +11,7 @@ export function Challenges() {
 		return <div className="text-2xl">Loading...</div>;
 	}
 	if(isError){
-		if(error.data.code=="NOT_AUTHORIZED") return <Navigate to = "/login"/>
+		if(error.data.code=="NOT_AUTHORIZED") console.log(error.data)
 	}
 	return (
 		<>
@@ -96,7 +96,6 @@ export function Challenges() {
 					</div>
 				</div>
 			</div>
-			{}
 		</>
 	);
 }

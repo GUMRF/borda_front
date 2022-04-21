@@ -20,7 +20,7 @@ export function Profile() {
                                 <div class='w-full md:w-1/2 px-3 mb-6'>
                                     <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 pr-2'>Nickname</label>
                                     <div className="flex flex-row">
-                                        <input class='w-full appearance-none block bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-2 px-2 leading-tight focus:outline-none  focus:border-gray-500' type='Nickname' id="Nickname" placeholder={Nick} required />
+                                        <input class='w-full appearance-none block bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-2 px-2 leading-tight focus:outline-none  focus:border-gray-500' type='Nickname' id="Nickname" placeholder={data.username} required />
                                         <button class="ml-1 appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">Change</button>
                                     </div>
                                 </div>
