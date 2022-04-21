@@ -6,7 +6,7 @@ import TaskCard from "../components/TaskCard";
 import { useGetTasksQuery } from "../api/tasks";
 
 export function Challenges() {
-	const { data, error, isLoading, isError } = useGetTasksQuery();
+	const { data, error, isLoading, isError,refetch } = useGetTasksQuery();
 	if (isLoading) {
 		return <div className="text-2xl">Loading...</div>;
 	}
@@ -89,6 +89,7 @@ export function Challenges() {
 								title={task.title}
 								points={task.points}
 								isSolved={task.isSolved}
+								refetch={refetch}
 								tags={["baby", "reverse", "linux"]}
 								category={task.complexity}
 								description={task.description}
