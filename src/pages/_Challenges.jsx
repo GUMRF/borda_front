@@ -1,21 +1,27 @@
 import { React, useState, useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
-import API_BASE_URL from "../config";
 
 import TaskCard from "../components/TaskCard";
 import { useGetTasksQuery } from "../api/tasks";
 
 export function Challenges() {
-	const { data, error, isLoading, isError,refetch } = useGetTasksQuery();
+	const { data, error, isLoading } = useGetTasksQuery();
+
 	if (isLoading) {
 		return <div className="text-2xl">Loading...</div>;
 	}
-	if (isError) {
-		if (error.data.code == "NOT_AUTHORIZED") console.log(error.data)
+
+	if (error) {
+		return (<div>
+			<h1 className="text-2xl">Error</h1>
+			<p>{error.message}</p>
+		</div>
+		)
 	}
+
 	return (
 		<>
-			<div className="flex flex-row w-full text-sm h-screen">
+			<div className="flex flex-row w-full text-sm">
 				<div
 					className="
 					w-60 w-min-60 h-screen
@@ -74,9 +80,6 @@ export function Challenges() {
 							{/*https://www.npmjs.com/package/react-fast-marquee*/}
 						</marquee>
 					</div>
-					{isError ? <>
-						{error.data.code == "NOT_AUTHORIZED" ? <div className="w-full h-full text-center text-2xl pt-12">Что бы начать решать таски, для начала авторизуйся</div> : <div>Произошла ошибка</div>}
-					</> : 
 					<div className="
 						p-4
 						grid grid-cols-1 gap-4
@@ -88,18 +91,16 @@ export function Challenges() {
 								id={task.id}
 								title={task.title}
 								points={task.points}
-								isSolved={task.isSolved}
-								refetch={refetch}
 								tags={["baby", "reverse", "linux"]}
-								category={task.complexity}
-								description={task.description}
-								author={{ name: task.author.name, contact: task.author.contact }}
+								category="crypto"
+								author={{ name: "Nlxes", contact: "@N1x3s" }}
 								color="blue"
 							/>
 						))}
-					</div>}
+					</div>
 				</div>
 			</div>
+			{localStorage.getItem("token") === null ? <Navigate to="/sign-up" /> : null}
 		</>
 	);
 }
