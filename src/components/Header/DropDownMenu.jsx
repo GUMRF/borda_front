@@ -30,11 +30,7 @@ export function DropDownMenu(props) {
 		<Menu>
 			<Menu.Button
 				as="div"
-				className="
-                flex items-center
-                h-full w-60  
-                border-r-2 border-zinc-900
-                hover:bg-zinc-900"
+				className="flex items-center h-full w-60 border-r-2 border-zinc-900 hover:bg-zinc-900"
 			>
 				<div className="mx-4">{props.icon}</div>
 				<div className="grow pl-2 flex items-center">{props.content}</div>
@@ -61,7 +57,7 @@ export function DropDownMenu(props) {
 					className={`absolute z-50 top-14 my-2 ${props.position==='right' ? "right-0" : "left-0"} w-60 shadow-lg bg-zinc-800`}
 				>
 					<div className="flex flex-col py-2">
-						{props.items.map((item) => (
+						{props.items.map((item, _) => (
 							<DropDownMenuItem label={item} />
 						))}
 					</div>

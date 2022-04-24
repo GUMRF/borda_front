@@ -8,11 +8,7 @@ export default function Header() {
 	return (
 		<>
 			<header
-				className="
-          w-full h-14 
-          flex flex-row
-          bg-zinc-800
-          text-sm text-gray-200"
+				className="sticky z-50 top-0 w-full h-14 flex flex-row bg-zinc-800 text-sm text-gray-200"
 			>
 				<NavMenu />
 				<div className='flex flex-row flex-1 justify-between items-center h-full'>
