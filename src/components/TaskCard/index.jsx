@@ -1,48 +1,10 @@
 import { React, useState, useEffect } from "react";
 import { CheckIcon } from "@heroicons/react/outline";
-import { FlagIcon } from "@heroicons/react/outline";
+import { FlagIcon } from "@heroicons/react/solid";
 
 import { useSendFlagMutation } from "../../api/tasks";
 
-const TaskColors = {
-	"misc": {
-		bg: "bg-blue-50",
-		border: "border-blue-300",
-		text: "text-blue-600"
-	},
-	"crypto": {
-		bg: "bg-green-50",
-		border: "border-green-300",
-		text: "text-green-600"
-	},
-	"web": {
-		bg: "bg-rose-50",
-		border: "border-rose-300",
-		text: "text-rose-600"
-	},
-	"forensics": {
-		bg: "bg-purple-50",
-		border: "border-purple-300",
-		text: "text-purple-600"
-	},
-	"reverse": {
-		bg: "bg-orange-50",
-		border: "border-orange-300",
-		text: "text-orange-600"
-	}
-}
-
-const TaskColorsName = {
-	"misc": "blue",
-	"crypto": "green",
-	"web": "rose",
-	"forensics": "purple",
-	"reverse": "orange"
-}
-
 export default function TaskCard(props) {
-	const Task = props.task
-
 	const [isOpen, setIsOpen] = useState(0);
 	const [newAnswer, setNewAnswer] = useState("");
 	const [isCorrect, setCorrect] = useState("");
@@ -58,7 +20,7 @@ export default function TaskCard(props) {
 	const handleFlag = async () => {
 		if (newAnswer) {
 			const flag = await inputFlag({
-				id: props.Task.id,
+				id: props.props.task.id,
 				flag: newAnswer,
 			}).unwrap();
 			setNewAnswer("");
@@ -71,92 +33,106 @@ export default function TaskCard(props) {
 	return (
 		<>
 			<div className={`
-				bg-${TaskColorsName[Task.category]}-50
-				border-2 rounded border-${TaskColorsName[Task.category]}-300
+				${props.color.background}
+				border-2 rounded ${props.color.border}
 				overflow-clip
 				${isOpen ? "2xl:col-span-4 lg:col-span-3 md:col-span-2" : ""}
 			`}
 			>
-				<div className={`${isOpen ? `border-b-2 border-${TaskColorsName[Task.category]}-300` : ""}`}
+				<div
+					className={`p-5 ${isOpen ? `border-b-2  ${props.color.border}` : ""}`}
 					onClick={() => setIsOpen(!isOpen)}
 				>
-					<div className="
-						px-4 py-2
-						flex flex-row justify-between 
-						font-semibold text-lg"
-					>
-						<div className={`${TaskColors[Task.category].bg} text-xl`}>
-							{Task.title}
+					<div className="flex flex-col justify-items-end h-full">
+						{/* Title and points */}
+						<div className=" flex flex-row justify-between font-semibold text-xl">
+							<div className={`${props.color.text}`}>
+								{props.task.title}
+							</div>
+							<div className="text-black ml-5">{props.task.points}</div>
 						</div>
-						<div className="text-black ml-5">{Task.points}</div>
-					</div>
+						{/* Category and solve count */}
+						<div className="flex flex-row justify-between items-center">
+							<div className="text-lg font-normal">
+								<div className="flex flex-row">
+									<span className={`${props.color.text}`}>
+										{props.task.category}
+									</span>
+									{isOpen ? (
+										<div className="contents">
+											{props.tags.map((tag, _) => (
+												<div className="ml-5">
+													#{tag}
+												</div>
+											))}
+										</div>
+									) : null}
+								</div>
+							</div>
 
-					<div className="flex flex-row justify-between px-4">
-						<div className="">
-							<div className="flex flex-row">
-								<span className="text-lime-500 font-bold text-xl">
-									{Task.category}
+							<div className="flex flex-row items-center ml-5">
+								<span>
+									<CheckIcon className="h-5 w-5" strokeWidth={1} />
 								</span>
-								{isOpen ? (
-									<div className="flex flex-row">
-										{props.tags.map((tag) => (
-											<div className="text-black font-semibold text-xl ml-5">
-												#{tag}
-											</div>
-										))}
-									</div>
-								) : null}
+								<span className="text-black font-medium">0</span>
 							</div>
 						</div>
-
-						<div className="flex flex-row items-center ml-5">
-							<span>
-								<CheckIcon className="h-5 w-5" strokeWidth={1} />
-							</span>
-							<span className="text-black font-normal text-xl">3</span>
-						</div>
+						{/* Author */}
+						{isOpen ? (
+							<div className="font-medium pt-2">
+								by {props.task.author.name} ({props.task.author.contact})
+							</div>
+						) : null}
 					</div>
-					{isOpen ? (
-						<div className="text-sky-500 font-medium py-2 px-4">
-							by {Task.author.name} ({Task.author.contact})
-						</div>
-					) : null}
 				</div>
 				{isOpen ? (
 					<>
-						<div className="px-4">
-							<p>{Task.description}</p>
+						<div className="p-5">
+							<p>{props.task.description}</p>
 
-							<div className="text-red-600 py-2 ">
-								{Task.link ? Task.link : "file.zip //TODO:сделать ссылкой"}
+							<div className="text-red-600 py-4">
+								{props.task.link ? props.task.link : "file.zip //TODO:сделать ссылкой"}
 							</div>
-							{!Task.isSolved ? (
-								<div className="py-3 flex flex-row justify-between">
+							{props.task.isSolved ? null : (
+								<div className="pt-5 flex flex-row justify-between">
 									<input
 										type="text"
 										value={newAnswer}
 										onChange={(e) => setNewAnswer(e.target.value)}
-										className={`px-2 appearance-none 
-			              				w-full h-9 text-base rounded hover: bg-${props.color}-100`}
-										placeholder="CTF{...}"
+										className={`appearance-none
+											block w-full h-9
+											text-base rounded
+											border-2 ${props.color.border}
+											focus:${props.color.focus} focus:ring-4 focus:${props.color.border}
+											`}
+										placeholder="flag{...}"
 									/>
 									<button
 										type="button"
 										onClick={handleFlag}
-										className={`bg-${props.color}-300 hover:bg-${props.color}-400 h-9 text-black ml-4 px-4 rounded font-medium border-1 border-${props.color}-300`}
+										className={`
+											${props.color.textLight}
+											${props.color.backgroundDark} 
+											hover:${props.color.border}
+											hover:${props.color.hover}
+											h-9 ml-4 px-4
+											text-black  rounded font-medium
+											border-1 ${props.color.border}
+										`}
 									>
 										Отправить
 									</button>
-								</div>) : null}
+								</div>)}
 						</div>
 						<div className={`
-									h-7 px-3
-									flex justify-between items-center 
-									font font-semibold 
-									border-t-2 border-${props.color}-400`}
+							h-7 px-3
+							flex justify-between items-center 
+							font-semibold 
+							border-t-2 ${props.color.border}
+						`}
 						>
 							<div className="flex flex-row items-center">
-								<FlagIcon className="w-4 h-4" strokeWidth={1} />
+								<FlagIcon className={`w-4 h-41 ${props.color.text}`} strokeWidth={1} />
 								{/* <span className="pl-2">Simen228</span> */}
 							</div>
 							{/* <span>2 hours ago by GO_UKRAINE!</span> */}
