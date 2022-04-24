@@ -5,12 +5,3 @@ export const prepareHeaders = () => {
     headers.set("Authorization", `Bearer ${token}`);
     return headers;
 };
-
-// export function prepareHeaders() {
-//     const token = localStorage.getItem('token')
-
-//     var headers = new Headers();
-//     headers.set("Authorization", `Bearer ${token}`);
-
-//     return headers
-// }

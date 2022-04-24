@@ -6,12 +6,7 @@ export const taskApi = createApi({
   reducerPath: "api/tasks",
   baseQuery: fetchBaseQuery({
     baseUrl: `${API_BASE_URL}`,
-
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem('token')
-      headers.set("Authorization", `Bearer ${token}`);
-      return headers;
-    },
+    prepareHeaders: prepareHeaders,
     mode: "cors",
   }),
   endpoints: (build) => ({
