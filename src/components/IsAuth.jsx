@@ -5,7 +5,7 @@ export const IsAuth = (flag) => {
     const { error, isError, isLoading,refetch } = useGetUserProfileQuery();
     if (isLoading) {return null}
     if (flag===true){
-        if (isError&&error.status===403) {console.log(123);return (<Navigate to= "/"/>)}
+        if (error) {console.log(error)}
         refetch();
     }
     return (!isError)

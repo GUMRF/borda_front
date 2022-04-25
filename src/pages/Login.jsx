@@ -35,10 +35,13 @@ export function Login() {
   if (IsAuth(flag) === true) {
     return <Navigate to="/challenges" />;
   }
+  // if (IsAuth(flag) === 'NO_TEAM'){
+  //   return(<Navigate to="/about" />)
+  // }
 
-//   if (isError && error.status === "403") {
-// 	return <Navigate to="/about" />;
-//   }
+  // if (isError && error.status === "403") {
+	// return <Navigate to="/about" />;
+  // }
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

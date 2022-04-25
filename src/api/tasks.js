@@ -39,7 +39,10 @@ export const taskApi = createApi({
         }
       },
     }),
+    getAdminTasks: build.query({
+      query: () => "admin/tasks",
+    }),
   }),
 });
 
-export const { useGetTasksQuery, useSendFlagMutation,useUpdateTasksMutation } = taskApi;
+export const { useGetTasksQuery, useSendFlagMutation,useUpdateTasksMutation, useGetAdminTasksQuery } = taskApi;
