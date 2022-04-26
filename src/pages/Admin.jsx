@@ -1,52 +1,71 @@
 import { React, useState, useEffect } from "react";
 import { Tab } from '@headlessui/react'
 import { useGetAdminTasksQuery } from "../api/tasks";
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
+import { Loading } from "../components/Loading";
 
 export default function AdminPage() {
     const { data, error, isLoading, isError } = useGetAdminTasksQuery();
     if (isLoading) {
-        return <div className="text-2xl">Loading...</div>;
+        return <Loading />
     }
     if (isError) {
         if (error.data.code == "NOT_AUTHORIZED") console.log(error.data)
     }
     return (
-        <div className="flex w-full max-w-md px-2 py-16 sm:px-0">
-            <Tab.Group>
-                <Tab.List className="space-x-1 rounded-xl p-1 w-64">
-                    {data.map((task) => (
-                        <Tab
-                            className={({ selected }) =>
-                                classNames(
-                                    'w-64 rounded-lg py-2.5 text-sm font-medium leading-5',
-                                    'focus:outline-none ring-white ring-opacity-60 ring-offset-2 ring-offset-black focus:ring-2',
-                                    selected
-                                        ? 'bg-zinc-900 shadow text-white'
-                                        : 'hover:text-blue-600'
-                                )
-                            }
+        <Tab.Group as='div' className={'flex flex-row w-full h-full min-h-screen'}>
+            <Tab.List as="div" className="flex-none min-h-screen h-full w-60 w-min-60 pt-16 border-r-2 border-zinc-300">
+                {data.map((task) => (
+                    <Tab as="div" className={'h-full'}>
+                        {({ selected }) => (
+                            <div className={`flex flex-col w-full ${selected ? 'bg-black text-white' : ''}`}>
+                                <div className={`w-full py-2 border-b`}>
+                                    <div className="px-2 h-8 flex flex-row justify-between items-center">
+                                        <span >
+                                            {task.title}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </Tab>
+                ))}
+            </Tab.List>
+            <Tab.Panels className="flex-1">
+                {data.map((task) => (
+                    <Tab.Panel className={`p-5`}>
+                        <h1>ID: {task.id}</h1>
+                        <EditTask value={task.title} />
+                        <EditTask value={task.category} />
+                        <EditTask value={task.points} />
+                        <EditTask value={task.coplexity} />
+                        <EditTask value={task.description} />
+                        <EditTask value={task.hint} />
+                        <EditTask value={task.flag} />
+                        <EditTask value={task.link} />
+                        <button
+                            type="button"
+                            // onClick={handleFlag}
+                            className={`bg-b border border-black hover:bg-black focus:bg-black h-9 px-4 text-black hover:text-white focus:text-white  rounded font-medium border-1`}
                         >
-                            {task.title}
-                        </Tab>
-                    ))}
-                </Tab.List>
-                <Tab.Panels className="my-2 pl-5 w-80">
-                    {data.map((task) => (
-                        <Tab.Panel
-                            className={classNames(
-                                'bg-white p-3 border-2 border-black h-full',
-                                'focus:outline-none ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:ring-2'
-                            )}
-                        >
-                            {task.description}
-                        </Tab.Panel>
-                    ))}
-                </Tab.Panels>
-            </Tab.Group>
+                            Сохранить
+                        </button>
+                    </Tab.Panel>
+                ))}
+            </Tab.Panels>
+        </Tab.Group>
+    )
+}
+
+function EditTask(props) {
+    return (
+        <div className="py-2">
+            <input
+                type="text"
+                value={props.value}
+                className={`appearance-none w-full min-h-fit h-auto text-base rounded border-2 border-gray-500 focus:ring-gray-800 focus:ring-4 focus:border-gray-900`}
+                placeholder="nil"
+            />
         </div>
+
     )
 }
