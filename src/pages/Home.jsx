@@ -56,7 +56,7 @@ export function Home() {
                     }
                 </h1>
                 <div className="my-16">
-                    <Link to = {`${IsAuth()===true ? "/challenges" : "/login"}`}
+                    <Link to={`${IsAuth() === true ? "/challenges" : "/login"}`}
                         className="px-5 py-2.5 text-black bg-white focus:ring-4 focus:outline-none focus:ring-grey font-medium rounded-lg text-sm text-center"
                     >
                         <span>Play</span>

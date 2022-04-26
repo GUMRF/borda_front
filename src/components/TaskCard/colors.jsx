@@ -8,7 +8,7 @@ collection.set("test", {
     textLight: "text-gray-50",
     focus: "ring-gray-600",
     hover: "bg-gray-900"
-})  
+})
 
 collection.set("misc", {
     background: "bg-blue-50",
@@ -28,7 +28,7 @@ collection.set("crypto", {
     textLight: "text-green-50",
     focus: "ring-green-600",
     hover: "bg-green-900"
-})  
+})
 
 collection.set("web", {
     background: "bg-rose-50",
@@ -38,7 +38,7 @@ collection.set("web", {
     textLight: "text-rose-50",
     focus: "ring-rose-600",
     hover: "bg-rose-900"
-})  
+})
 
 collection.set("forensics", {
     background: "bg-purple-50",
@@ -48,7 +48,7 @@ collection.set("forensics", {
     textLight: "text-purple-50",
     focus: "ring-purple-600",
     hover: "bg-purple-900"
-})  
+})
 
 collection.set("reverse", {
     background: "bg-orange-50",

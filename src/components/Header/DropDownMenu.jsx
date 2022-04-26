@@ -54,7 +54,7 @@ export function DropDownMenu(props) {
 			>
 				<Menu.Items
 					as="div"
-					className={`absolute z-50 top-14 my-2 ${props.position==='right' ? "right-0" : "left-0"} w-60 shadow-lg bg-zinc-800`}
+					className={`absolute z-50 top-14 my-2 ${props.position === 'right' ? "right-0" : "left-0"} w-60 shadow-lg bg-zinc-800`}
 				>
 					<div className="flex flex-col py-2">
 						{props.items.map((item, _) => (

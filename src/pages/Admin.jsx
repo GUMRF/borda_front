@@ -42,7 +42,7 @@ export default function AdminPage() {
                                 'focus:outline-none ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:ring-2'
                             )}
                         >
-                          {task.description}
+                            {task.description}
                         </Tab.Panel>
                     ))}
                 </Tab.Panels>
