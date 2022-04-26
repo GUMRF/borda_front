@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useSignUpMutation } from "../api/auth";
+import { IsAuth } from "../components/IsAuth";
 
 export function Register() {
 	const [newLogin, setNewLogin] = useState("");
@@ -18,7 +19,7 @@ export function Register() {
 			setNewLogin("");
 		}
 	};
-
+	if(IsAuth()===true) {return <Navigate to ="/challenges"/>}
 	return (
 		<>
 			<div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -125,7 +126,6 @@ export function Register() {
 					</div>
 				</div>
 			</div>
-			{localStorage.getItem("token") === null ? null : <Navigate to="/challenges" />}
 		</>
 	);
 }

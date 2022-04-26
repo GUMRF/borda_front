@@ -6,16 +6,16 @@ import TaskCard from "../components/TaskCard";
 import { useGetTasksQuery } from "../api/tasks";
 
 export function Challenges() {
-	const { data, error, isLoading, isError } = useGetTasksQuery();
+	const { data, error, isLoading, isError,refetch } = useGetTasksQuery();
 	if (isLoading) {
 		return <div className="text-2xl">Loading...</div>;
 	}
-	if(isError){
-		if(error.data.code=="NOT_AUTHORIZED") console.log(error.data)
+	if (isError) {
+		if (error.data.code == "NOT_AUTHORIZED") console.log(error.data)
 	}
 	return (
 		<>
-			<div className="flex flex-row w-full text-sm">
+			<div className="flex flex-row w-full text-sm h-screen">
 				<div
 					className="
 					w-60 w-min-60 h-screen
@@ -74,6 +74,9 @@ export function Challenges() {
 							{/*https://www.npmjs.com/package/react-fast-marquee*/}
 						</marquee>
 					</div>
+					{isError ? <>
+						{error.data.code == "NOT_AUTHORIZED" ? <div className="w-full h-full text-center text-2xl pt-12">Что бы начать решать таски, для начала авторизуйся</div> : <div>Произошла ошибка</div>}
+					</> : 
 					<div className="
 						p-4
 						grid grid-cols-1 gap-4
@@ -86,6 +89,7 @@ export function Challenges() {
 								title={task.title}
 								points={task.points}
 								isSolved={task.isSolved}
+								refetch={refetch}
 								tags={["baby", "reverse", "linux"]}
 								category={task.complexity}
 								description={task.description}
@@ -93,7 +97,7 @@ export function Challenges() {
 								color="blue"
 							/>
 						))}
-					</div>
+					</div>}
 				</div>
 			</div>
 		</>

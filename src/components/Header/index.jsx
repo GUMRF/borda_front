@@ -18,7 +18,7 @@ export default function Header() {
 				<div className='flex flex-row flex-1 justify-between items-center h-full'>
 					{/* <SearchBar/> */}
 					<CountdownTimer countdownTimestampMs={20000000000000} />
-					{IsAuth() ? <Link to ="/login" className="pr-4">Login</Link> : <Account />}
+					{IsAuth()===true ? <Account /> : <Link to ="/login" className="pr-4">Login</Link> }
 				</div>
 			</header>
 		</>
