@@ -14,7 +14,8 @@ export function Scoreboard() {
 			</div>
 		)
 	}
-
+	
+	const data1 = Object.values(data);
 	// data.sort(function (a, b) {
 	// 	return a.score - b.score;
 	// });

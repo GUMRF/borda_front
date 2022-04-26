@@ -13,14 +13,10 @@ export default function TaskCard(props) {
 	useEffect(() => {
 	}, [isOpen]);
 
-	// if (isLoading) {
-	// 	return <></>;
-	// }
-
 	const handleFlag = async () => {
 		if (newAnswer) {
 			const flag = await inputFlag({
-				id: props.props.task.id,
+				id: props.task.id,
 				flag: newAnswer,
 			}).unwrap();
 			setNewAnswer("");

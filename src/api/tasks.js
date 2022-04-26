@@ -1,6 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  createApi,
+  fetchBaseQuery
+} from "@reduxjs/toolkit/query/react";
 import API_BASE_URL from "../config";
-import { prepareHeaders } from "./base";
+import {
+  prepareHeaders
+} from "./base";
 
 export const taskApi = createApi({
   reducerPath: "api/tasks",
@@ -16,7 +21,10 @@ export const taskApi = createApi({
 
     sendFlag: build.mutation({
       query(data) {
-        const { id, ...body } = data
+        const {
+          id,
+          ...body
+        } = data
         return {
           url: `tasks/${id}/flag`,
           method: "POST",
@@ -34,7 +42,15 @@ export const taskApi = createApi({
         }
       },
     }),
+    getAdminTasks: build.query({
+      query: () => "admin/tasks",
+    }),
   }),
 });
 
-export const { useGetTasksQuery, useSendFlagMutation,useUpdateTasksMutation } = taskApi;
+export const {
+  useGetTasksQuery,
+  useSendFlagMutation,
+  useUpdateTasksMutation,
+  useGetAdminTasksQuery
+} = taskApi;
