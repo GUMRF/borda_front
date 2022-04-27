@@ -15,7 +15,7 @@ export function Account() {
 			content={
 				<div className="flex flex-col">
 					<span className="">{data.username}</span>
-					<span className="text-xs">{error == 500 ? <>Без команды(лох)</> : <>{data.team.name}</>}</span>
+					<span className="text-xs">{error === 500 ? <>Без команды(лох)</> : <>{data.team.name}</>}</span>
 				</div>
 			}
 			icon={

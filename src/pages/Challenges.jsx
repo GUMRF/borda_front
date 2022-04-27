@@ -15,6 +15,10 @@ function handleError(error) {
 		title = "Ошибка авторизации"
 		detail = "Авторизуйтесь для продолжения."
 	}
+	if (error.data.code == "MISSING_TEAM_ID") {
+		title = "У вас не команды"
+		detail = "Что бы начать играть, вступите или создайте команду в настройках профиля"
+	}
 
 	return (
 		<div className="pt-12 flex flex-col items-center">
