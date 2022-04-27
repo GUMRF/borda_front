@@ -4,7 +4,8 @@ import { Loading } from '../components/Loading';
 
 export function Scoreboard() {
 	const { data, isError, error, isLoading } = useGetScoreboardQuery();
-	console.log(data)
+
+	if (isLoading){return <Loading/>}
 
 	if (error) {
 		return (

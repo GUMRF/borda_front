@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Tab } from '@headlessui/react'
-import { useGetAdminTasksQuery } from "../api/tasks";
+import { useGetAdminTasksQuery, useUpdateTasksMutation } from "../api/tasks";
 import { Loading } from "../components/Loading";
 import { UpdateTasks } from "./UpdateTasks";
 
@@ -8,13 +8,27 @@ import { Switch } from '@headlessui/react'
 
 export default function AdminPage() {
     const { data, error, isLoading, isError } = useGetAdminTasksQuery();
+    const [isTaskActive] = useUpdateTasksMutation();
+
     if (isLoading) {
         return <Loading />
     }
     if (isError) {
         if (error.data.code == "NOT_AUTHORIZED") console.log(error.data)
     }
+
+    const handleIsActive = async (id, flag) => {
+        if (data) {
+            await isTaskActive({
+                id: id,
+                is_active: flag
+            })
+        }
+    };
+
     return (
+        <>
+        <button type="button" onClick = {handleIsActive}>SSS</button>
         <Tab.Group as='div' className={'flex flex-row w-full h-full min-h-screen'}>
             <Tab.List as="div" className="flex-none min-h-screen h-full w-60 w-min-60 pt-16 border-r-2 border-zinc-300">
                 {data.map((task) => (
@@ -47,7 +61,7 @@ export default function AdminPage() {
                         <EditTask value={task.link} />
                         <div className="flex flex-row w-32 justify-between py-5">
                             <div className="flex items-center">{JSON.stringify(task.isActive)}</div>
-                            <Toggle value={task.isActive} />
+                            <Toggle value={task.isActive} handleIsActive = {handleIsActive} />
                         </div>
                         <button
                             type="button"
@@ -60,7 +74,9 @@ export default function AdminPage() {
                 ))}
             </Tab.Panels>
         </Tab.Group>
+        </>
     )
+    
 }
 
 function EditTask(props) {
@@ -82,7 +98,7 @@ function Toggle(props) {
 
             <Switch
                 checked={null}
-                onChange={null}
+                onChange={()=>props.handleIsActive(1)}
                 className={`${props.value ? 'bg-teal-900' : 'bg-teal-700'}
             relative inline-flex flex-shrink-0 h-[38px] w-[74px] border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
             >

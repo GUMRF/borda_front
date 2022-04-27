@@ -13,7 +13,14 @@ export const userApi = createApi({
 		getUserProfile: build.query({
 			query: () => "users/me",
 		}),
+		createTeam: build.mutation({
+			query: (body) => ({
+				url: "teams",
+				method: "POST",
+				body,
+			}),
+		}),
 	}),
 });
 
-export const { useGetUserProfileQuery } = userApi;
+export const { useGetUserProfileQuery, useLazyGetUserProfileQuery, useCreateTeamMutation } = userApi;

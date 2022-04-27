@@ -24,7 +24,6 @@ export default function TaskCard(props) {
 			setCorrect(flag.isCorrect);
 		}
 	};
-	console.log(isCorrect);
 
 	return (
 		<>

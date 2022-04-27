@@ -26,13 +26,13 @@ export default function App() {
             <Routes>
                 <Route path="*" element={<NotFound />} />
                 <Route path="/" element={< Home />} />
-                <Route path="about" element={<Layout> < About /> </Layout>} />
+                <Route path="about" element={< About /> }/>
                 <Route path="login" element={< Login />} />
                 <Route path="register" element={< Register />} />
                 <Route path="logout" element={< Logout />} />
                 <Route path="scoreboard" element={<Layout> < Scoreboard /> </Layout>} />
                 <Route path="challenges" element={<Layout> < Challenges /> </Layout>} />
-                <Route path="profile" element={<Layout> < Profile /> </Layout>} />
+                <Route path="profile" element={< Profile /> } />
                 <Route path="admin" element={<Layout> < AdminPage /> </Layout>} />
                 <Route path="admin/task/*" element={< UpdateTasks />} />
             </Routes>
