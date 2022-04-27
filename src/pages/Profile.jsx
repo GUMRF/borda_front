@@ -11,18 +11,19 @@ export const isCapitan = false;
 
 export function Profile() {
     let isCurrentlyInTeam;
-    const [type, setType] = useState(true);
+    const [type, setType] = useState("join");
     const { data, error, isLoading, isError } = useGetUserProfileQuery();
     const [teamAttribute, setTeamAttribute] = useState();
     const [attacheTeam] = useCreateTeamMutation();
-    const handleTeam = async (props) => {
+    const handleTeam = async () => {
         if (teamAttribute) {
             const team = await attacheTeam({
-                method: 'create',
+                method: type,
                 attribute: teamAttribute,
             });
         }
     };
+
     if (isLoading) {
         return <div className="text-2xl">Loading...</div>
     }
@@ -63,7 +64,7 @@ export function Profile() {
                                             }
                                         </>) :
                                         <>
-                                            {type === true ? (
+                                            {type === "join" ? (
                                                 <>
                                                     <div className="flex flex-row mb-1">
                                                         <input class='w-full appearance-none block bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-2 px-2 leading-tight focus:outline-none  focus:border-gray-500' 
@@ -73,7 +74,7 @@ export function Profile() {
                                                         required />
                                                         <button onClick={handleTeam} class="ml-1 appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">Join</button>
                                                     </div>
-                                                    <a href="#" onClick={() => setType(false)} className="text-indigo-700">or (Create own)</a>
+                                                    <a href="#" onClick={() => setType("create")} className="text-indigo-700">or (Create own)</a>
                                                 </>) : (
                                                 <>
                                                     <div className="flex flex-row mb-1">
@@ -84,7 +85,7 @@ export function Profile() {
                                                         required />
                                                         <button onClick={handleTeam} class="ml-1 appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">Create</button>
                                                     </div>
-                                                    <a href="#" onClick={() => setType(true)} className="text-indigo-700">or (Join)</a>
+                                                    <a href="#" onClick={() => setType("join")} className="text-indigo-700">or (Join)</a>
                                                 </>)
                                             }
 

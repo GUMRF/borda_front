@@ -1,25 +1,58 @@
 import { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
-import { useSignUpMutation } from "../api/auth";
+import { useSignInMutation, useSignUpMutation } from "../api/auth";
+import { useLazyGetUserProfileQuery } from "../api/users";
 import { IsAuth } from "../components/IsAuth";
 
 export function Register() {
 	const [newLogin, setNewLogin] = useState("");
 	const [newPass, setNewPass] = useState("");
 	const [newContact, setNewContact] = useState("");
-	const [inputRegistr, { }] = useSignUpMutation();
 
-	const handleLogin = async () => {
-		if (newLogin) {
-			await inputRegistr({
+	const [inputRegistr, {isSuccess }] = useSignUpMutation();
+	const [fetchMe, { isLoading }] = useLazyGetUserProfileQuery();
+	const [signIn] = useSignInMutation();
+
+
+	const handleRegistr = async () => {
+		try {
+			const result = await inputRegistr({
 				contact: newContact,
 				password: newPass,
 				username: newLogin,
-			}).unwrap();
-			setNewLogin("");
+			});
+
+			if (result) {
+				handleLogin();
+			}
+		} catch (err) {
+			console.log(err);
 		}
 	};
-	if(IsAuth()===true) {return <Navigate to ="/challenges"/>}
+	
+
+	const handleLogin = async () => {
+		try {
+			const result = await signIn({
+				password: newPass,
+				username: newLogin,
+			});
+
+			if (result.data) {
+				localStorage.setItem("token", result.data.token);
+				fetchMe();
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+
+	if (IsAuth() === true) {
+		return <Navigate to="/challenges" />;
+	}
+
+	if (isLoading === true) { return <>ss</> }
 	return (
 		<>
 			<div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -103,7 +136,7 @@ export function Register() {
 						<div>
 							<button
 								type="button"
-								onClick={handleLogin}
+								onClick={()=>{handleRegistr()}}
 								className="
                   group relative  
                   flex justify-center 
