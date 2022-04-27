@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { useGetScoreboardQuery } from "../api/scoreboard";
+import { Loading } from '../components/Loading';
 
 export function Scoreboard() {
 	let i = 1;
-	
-	const { data, isLoading } = useGetScoreboardQuery();
-	if (isLoading) {
-		return <div className="text-2xl">Loading...</div>;
+
+	const { data, error, isLoading } = useGetScoreboardQuery();
+	if (isLoading) { return <Loading /> }
+
+	if (error) {
+		return (
+			<div>
+				<h1>Error</h1>
+				<p>{error}</p>
+			</div>
+		)
 	}
-	console.log(data)
 	const dataSort = Object.values(data);
 	// const data1 = [
 	// 	{ place: 1, teamName: 'Kekek', score: 152, teamMembersCount: 4 },
@@ -30,38 +37,38 @@ export function Scoreboard() {
 	return (
 		<>
 
-				<div class="justify-center flex pt-8 text-gray-200">
-					<table class="text-sm text-left w-2/3">
-						<thead class="text-xs  uppercase bg-zinc-800">
-							<tr>
-								<th scope="col" class="px-6 py-3 w-16 text-center">
-									Place
-								</th>
-								<th scope="col" class="px-6 py-3 text-center">
-									Team
-								</th>
-								<th scope="col" class="px-6 py-3 text-center">
-									<button type="button">Points</button>
-								</th>
-								<th scope="col" class="px-6 py-3 text-center">
-									<button type="button">Members</button>
-								</th>
-							</tr>
-						</thead>
-						{dataSort.map((table, id) => (
-							<>
-								<tbody>
-									<tr class="border-b bg-zinc-700 border-zinc-900">
-										<td class="px-6 py-4 text-center">{id+1}</td>
-										<td class="px-6 py-4 text-center">{table.teamName}</td>
-										<td class="px-6 py-4 text-center">{table.score}</td>
-										<td class="px-6 py-4 text-center">{table.teamMembersCount}</td>
-									</tr>
-								</tbody>
-							</>
-						))}
-					</table>
-				</div>
+			<div class="justify-center flex pt-8 text-gray-200">
+				<table class="text-sm text-left w-2/3">
+					<thead class="text-xs  uppercase bg-zinc-800">
+						<tr>
+							<th scope="col" class="px-6 py-3 w-16 text-center">
+								Place
+							</th>
+							<th scope="col" class="px-6 py-3 text-center">
+								Team
+							</th>
+							<th scope="col" class="px-6 py-3 text-center">
+								<button type="button">Points</button>
+							</th>
+							<th scope="col" class="px-6 py-3 text-center">
+								<button type="button">Members</button>
+							</th>
+						</tr>
+					</thead>
+					{dataSort.map((table, id) => (
+						<>
+							<tbody>
+								<tr class="border-b bg-zinc-700 border-zinc-900">
+									<td class="px-6 py-4 text-center">{id + 1}</td>
+									<td class="px-6 py-4 text-center">{table.teamName}</td>
+									<td class="px-6 py-4 text-center">{table.score}</td>
+									<td class="px-6 py-4 text-center">{table.teamMembersCount}</td>
+								</tr>
+							</tbody>
+						</>
+					))}
+				</table>
+			</div>
 		</>
 	)
 }
