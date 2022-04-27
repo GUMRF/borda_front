@@ -4,13 +4,10 @@ import { useState } from "react";
 import { useCreateTeamMutation } from "../api/users";
 
 // export const isCurrentlyInTeam = true;
-export const isCapitan = false;
-
-
-
 
 export function Profile() {
     let isCurrentlyInTeam;
+    let isCapitan;
     const [type, setType] = useState("join");
     const { data, error, isLoading, isError } = useGetUserProfileQuery();
     const [teamAttribute, setTeamAttribute] = useState();
@@ -27,8 +24,9 @@ export function Profile() {
     if (isLoading) {
         return <div className="text-2xl">Loading...</div>
     }
-    console.log(type)
+
     if (data.team.id === 0) { isCurrentlyInTeam = false } else { isCurrentlyInTeam = true }
+    if(data.team.captain.name === data.username) {isCapitan = true} else {isCapitan = false}
 
     return (
         <>
@@ -55,12 +53,13 @@ export function Profile() {
                                         <>
                                             {isCapitan ? (
                                                 <>
-                                                    <div className="flex flex-row mb-1">
-                                                        <input class='w-full appearance-none block bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-2 px-2 leading-tight focus:outline-none  focus:border-gray-500' type='text' value={data.team.name} required />
-                                                        <button class="ml-1 appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">Edit</button>
+                                                    <div className="mb-1">
+                                                        <div className="pt-2">{data.team.name}</div>
+                                                        <div className="pt-2">(Your invite token: {data.team.token})</div>
+                                                        {/* <button class="ml-1 appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">Edit</button> */}
                                                     </div>
                                                 </>
-                                            ) : <input class='w-full appearance-none block bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-2 px-2 leading-tight focus:outline-none  focus:border-gray-500' type='text' value={data.team.name} required />
+                                            ) : <div className="pt-2">{data.team.name}</div>
                                             }
                                         </>) :
                                         <>
@@ -92,12 +91,10 @@ export function Profile() {
                                         </>
                                     }
                                 </div>
-
-                                <div class='w-full md:w-full px-3 mb-6 '>
+                                {/* <div class='w-full md:w-1/2 px-3 mb-6'>
                                     <label class='block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2'>password</label>
                                     <button class="appearance-none bg-gray-200 text-gray-900 px-2 py-1 shadow-sm border border-gray-400 rounded-md ">Change your password</button>
-                                </div>
-
+                                </div> */}
                             </div>
                         </form>
                     </div>

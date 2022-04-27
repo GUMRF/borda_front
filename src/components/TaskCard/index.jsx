@@ -117,7 +117,9 @@ export default function TaskCard(props) {
 									>
 										Отправить
 									</button>
-								</div>)}
+								</div>
+								)}
+								{isCorrect===false ? <div className="text-red-500 pt-2 text-base">Nope... Invalid flag. Try again.</div> : null }
 						</div>
 						<div className={`
 							h-7 px-3

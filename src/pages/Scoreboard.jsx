@@ -1,29 +1,35 @@
 import React, { useState } from 'react';
 import { useGetScoreboardQuery } from "../api/scoreboard";
-import { Loading } from '../components/Loading';
 
 export function Scoreboard() {
-	const { data, isError, error, isLoading } = useGetScoreboardQuery();
-
-	if (isLoading){return <Loading/>}
-
-	if (error) {
-		return (
-			<div>
-				<h1>Error</h1>
-				<p>{error}</p>
-			</div>
-		)
-	}
+	let i = 1;
 	
-	const data1 = Object.values(data);
-	// data.sort(function (a, b) {
-	// 	return a.score - b.score;
-	// });
-
+	const { data, isLoading } = useGetScoreboardQuery();
+	if (isLoading) {
+		return <div className="text-2xl">Loading...</div>;
+	}
+	console.log(data)
+	const dataSort = Object.values(data);
+	// const data1 = [
+	// 	{ place: 1, teamName: 'Kekek', score: 152, teamMembersCount: 4 },
+	// 	{ place: 1, teamName: 'Kasd', score: 1522, teamMembersCount: 4 },
+	// 	{ place: 1, teamName: 'Kesdfek', score: 138, teamMembersCount: 4 },
+	// 	{ place: 1, teamName: 'Kdfk', score: 162, teamMembersCount: 4 },
+	// 	{ place: 1, teamName: 'Kefgk', score: 34, teamMembersCount: 4 },
+	// 	{ place: 1, teamName: 'Kevbek', score: 15, teamMembersCount: 4 },
+	// 	{ place: 1, teamName: 'Kezxck', score: 25, teamMembersCount: 4 }
+	// ];
+	dataSort.sort(function (a, b) {
+		if (a.score <= b.score) {
+			return 1;
+		}
+		if (a.score >= b.score) {
+			return -1;
+		}
+	});
 	return (
 		<>
-			{isLoading ? <Loading /> :
+
 				<div class="justify-center flex pt-8 text-gray-200">
 					<table class="text-sm text-left w-2/3">
 						<thead class="text-xs  uppercase bg-zinc-800">
@@ -42,7 +48,7 @@ export function Scoreboard() {
 								</th>
 							</tr>
 						</thead>
-						{data.map((table, id) => (
+						{dataSort.map((table, id) => (
 							<>
 								<tbody>
 									<tr class="border-b bg-zinc-700 border-zinc-900">
@@ -56,7 +62,6 @@ export function Scoreboard() {
 						))}
 					</table>
 				</div>
-			}
 		</>
 	)
 }
