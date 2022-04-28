@@ -1,7 +1,7 @@
 # Borda frontend
 
 ## Run
-    export BACKEND_URL=<localhost:8080>
+    export REACT_APP_BACKEND_URL="localhost:8080"
     npm start
 
 ## Build
