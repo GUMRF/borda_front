@@ -9,6 +9,7 @@ import { Switch } from '@headlessui/react'
 export default function AdminPage() {
     const { data, error, isLoading, isError } = useGetAdminTasksQuery();
     const [isTaskActive] = useUpdateTasksMutation();
+    const [toggle, setToggle] = useState("")
 
     if (isLoading) {
         return <Loading />
@@ -28,12 +29,13 @@ export default function AdminPage() {
 
     return (
         <>
-        <button type="button" onClick = {handleIsActive}>SSS</button>
+        {console.log(toggle)}
+        <button type="button" >SSS</button>
         <Tab.Group as='div' className={'flex flex-row w-full h-full min-h-screen'}>
             <Tab.List as="div" className="flex-none min-h-screen h-full w-60 w-min-60 pt-16 border-r-2 border-zinc-300">
                 {data.map((task) => (
-                    <Tab as="div" className={'h-full'}>
-                        {({ selected }) => (
+                    <Tab as="div" className={'h-full'} >
+                        {({ selected }) => (<>
                             <div className={`flex flex-col w-full ${selected ? 'bg-black text-white' : ''}`}>
                                 <div className={`w-full py-2 border-b`}>
                                     <div className="px-2 h-8 flex flex-row justify-between items-center">
@@ -43,13 +45,14 @@ export default function AdminPage() {
                                     </div>
                                 </div>
                             </div>
+                            </>
                         )}
                     </Tab>
                 ))}
             </Tab.List>
             <Tab.Panels className="flex-1">
                 {data.map((task) => (
-                    <Tab.Panel className={`p-5`}>
+                    <Tab.Panel className={`p-5`} >
                         <h1>ID: {task.id}</h1>
                         <EditTask value={task.title} />
                         <EditTask value={task.category} />
@@ -60,8 +63,9 @@ export default function AdminPage() {
                         <EditTask value={task.flag} />
                         <EditTask value={task.link} />
                         <div className="flex flex-row w-32 justify-between py-5">
-                            <div className="flex items-center">{JSON.stringify(task.isActive)}</div>
-                            <Toggle value={task.isActive} handleIsActive = {handleIsActive} />
+                            <div className="flex items-center">{toggle==="" ?  JSON.stringify(task.isActive):toggle}</div>
+                            
+                            <Toggle id={task.id} isActive = {task.isActive} setToggle={setToggle} toggle={toggle}  handleIsActive = {handleIsActive} />
                         </div>
                         <button
                             type="button"
@@ -95,17 +99,21 @@ function EditTask(props) {
 
 function Toggle(props) {
     return (
-
             <Switch
                 checked={null}
-                onChange={()=>props.handleIsActive(1)}
-                className={`${props.value ? 'bg-teal-900' : 'bg-teal-700'}
+                onChange={()=>{
+                    if (props.toggle==="")
+                        props.setToggle(props.isActive);
+                    else {props.setToggle(!props.toggle)}
+                        props.handleIsActive(props.id,JSON.stringify(!(props.toggle)))
+                }}
+                className={`${props.toggle === null ? (props.isActive ? 'bg-teal-900' : 'bg-teal-700') : (props.toggle ?'bg-teal-900': 'bg-teal-700')}
             relative inline-flex flex-shrink-0 h-[38px] w-[74px] border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
                 <span className="sr-only"></span>
                 <span
                     aria-hidden="true"
-                    className={`${props.value ? 'translate-x-9' : 'translate-x-0'}
+                    className={`${props.toggle === null ? (props.isActive ? 'translate-x-9' : 'translate-x-0') : (props.toggle ?'translate-x-9' : 'translate-x-0')}
               pointer-events-none inline-block h-[34px] w-[34px] rounded-full bg-white shadow-lg transform ring-0 transition ease-in-out duration-200`}
                 />
             </Switch>
